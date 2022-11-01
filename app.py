@@ -14,10 +14,6 @@ app.config['SECRET_KEY'] = 'leotrujillo'
   
 app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=10)
 CORS(app) 
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:1234@localhost/sample'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
  
 DB_HOST = "localhost"
 DB_NAME = "sample1"
@@ -29,8 +25,9 @@ conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_
 @cross_origin() 
 @app.route('/')
 def home():
-    passhash = generate_password_hash('test')
+    passhash = generate_password_hash('asd')
     print(passhash)
+    return passhash
     if 'username' in session:
         username = session['username']
         return jsonify({'message' : 'You are already logged in', 'username' : username})
@@ -80,7 +77,7 @@ def login():
 def insert_post():
     try:
         _json = request.json
-        _iduser = _json['id_user']
+        _iduser = _json['user_id']
         _title = _json['title']
         _description = _json['description']
         _priority = _json['priority']
@@ -98,22 +95,59 @@ def insert_post():
     
         cursor.execute(mssg, mssg_values)
 
-        
-
+        resp = jsonify({'message' : 'You have inserted in posts successfully'})
+        resp.status_code = 200
         conn.commit()
         cursor.close()
-        conn.close()
-        return 200
+        return resp
 
 
     
-    except Exception as e: print(e)
+    except Exception as e: 
+        print(e)
+        resp1 = jsonify({'message' : 'Post could not be inserted'})
+        resp1.status_code = 400
+        return  resp1
+
+@cross_origin()     
+@app.route("/posts", methods=['GET'])
+def get_post():
+    try:
+        _json = request.json
+        _iduser = _json['user_id']
+        _title = _json['title']
+        _priority = _json['priority']
+        _status = _json['status']
+
+     
+
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        mssg = "SELECT * FROM posts WHERE user_id = %s  AND title = %s OR priority = %s OR status = %s ;" 
+        
+        mssg_values =(_iduser, _title, _priority, _status)
+
 
         
+    
+        cursor.execute(mssg, mssg_values)
 
-        ##resp1 = jsonify({'message' : 'Cagaste'})
+        resp = cursor.fetchall()
 
-       ## return  resp1
+        ans = jsonify({'message' : resp })
+        resp.status_code = 200
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return ans
+
+
+    
+    except Exception as e: 
+        print(e)
+        resp1 = jsonify({'message' : 'Post could not be returned'})
+        resp1.status_code = 400
+        return  resp1
+
 
         
 
