@@ -1,0 +1,5 @@
+#pip install -U flask-cors #pip install psycopg2 pip install sqlalchemy pip install Werkzeug pip install flasgger pip install routes
+
+#Import sample1 database, there's default user already created, username: user, passowrd: test
+
+#Utilize Insomnia or any type of API request software to test it out,
