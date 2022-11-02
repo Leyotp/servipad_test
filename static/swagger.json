@@ -1,0 +1,461 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Docs",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "description": "Metodo de login"
+    
+  },
+  
+  "paths": {
+    "/login": {
+      "get": {
+        "tags": [
+          "Log in"
+        ],
+        "description": "Logs in",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "description": "username",
+            "schema": {
+              "type": "string",
+              "example": "username"
+            }
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "description": "password",
+            "schema": {
+              "type": "string",
+              "example": "pass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged in",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "description": "Gets the user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Got user",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "description": "Posts the user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "description": "username",
+            "schema": {
+              "type": "string",
+              "example": "username"
+            }
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "string",
+              "example": "password"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fullname",
+            "required": true,
+            "description": "fulname",
+            "schema": {
+              "type": "string",
+              "example": "fullname"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Got user",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "description": "Updates the user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "description": "username",
+            "schema": {
+              "type": "string",
+              "example": "username"
+            }
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "description": "password",
+            "schema": {
+              "type": "string",
+              "example": "password"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fullname",
+            "required": true,
+            "description": "fullname",
+            "schema": {
+              "type": "string",
+              "example": "fullname"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated user",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "description": "Deletes the user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated user",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "description": "Gets the post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "post_id",
+            "required": true,
+            "description": "post id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "required": true,
+            "description": "user id",
+            "schema": {
+              "type": "integer",
+              "example": "user id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Got post",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "posts"
+        ],
+        "description": "Posts the post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "required": true,
+            "description": "title",
+            "schema": {
+              "type": "string",
+              "example": "title"
+            }
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "required": true,
+            "description": "description",
+            "schema": {
+              "type": "string",
+              "example": "description"
+            }
+          },
+          {
+            "in": "query",
+            "name": "priority",
+            "required": true,
+            "description": "priority",
+            "schema": {
+              "type": "string",
+              "example": "priority"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "description": "status",
+            "schema": {
+              "type": "string",
+              "example": "status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post inserted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "posts"
+        ],
+        "description": "updates the post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "post_id",
+            "required": true,
+            "description": "post id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "required": true,
+            "description": "user id",
+            "schema": {
+              "type": "integer",
+              "example": "user id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "title",
+            "required": true,
+            "description": "title",
+            "schema": {
+              "type": "string",
+              "example": "title"
+            }
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "required": true,
+            "description": "description",
+            "schema": {
+              "type": "string",
+              "example": "description"
+            }
+          },
+          {
+            "in": "query",
+            "name": "priority",
+            "required": true,
+            "description": "priority",
+            "schema": {
+              "type": "string",
+              "example": "priority"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "description": "status",
+            "schema": {
+              "type": "string",
+              "example": "status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated post",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "posts"
+        ],
+        "description": "Deletes the post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "post_id",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "integer",
+              "example": "id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deleted post",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

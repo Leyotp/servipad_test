@@ -1,17 +1,33 @@
 #app.py
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, render_template
 from flask_sqlalchemy import SQLAlchemy #pip install sqlalchemy
 from werkzeug.security import generate_password_hash, check_password_hash #pip install Werkzeug
 from flask_cors import CORS, cross_origin #pip install -U flask-cors
 from datetime import timedelta
-from flasgger import Swagger, LazyString, LazyJSONEncoder
+from flask_swagger_ui import get_swaggerui_blueprint
 from flasgger import swag_from
+
  
 import psycopg2 #pip install psycopg2 
 import psycopg2.extras
  
 app = Flask(__name__)
-app.json_encoder = LazyJSONEncoder
+
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Flask"
+    }
+)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+### end swagger specific ###
+
+
+
+
   
 app.config['SECRET_KEY'] = 'leotrujillo'
   
@@ -36,6 +52,8 @@ def hsh(v):
 @cross_origin() 
 @app.route('/')
 def home():
+
+
    
 #Verifies if the user is logged in already
     if 'username' in session:
@@ -260,20 +278,16 @@ def get_post():
 
         cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         mssg = "SELECT * FROM posts WHERE user_id = %s;" 
-        
         mssg_values =[_iduser]
 
         cursor.execute(mssg, mssg_values)
 
         resp = cursor.fetchall()
 
-        dict = {}
-        for item in resp:
-            dict.update(item)
-        
-        print(dict)
 
-        ans = jsonify(dict)
+        
+
+        ans = jsonify(resp)
         conn.commit()
         cursor.close()
         return ans
@@ -353,6 +367,8 @@ def delete_post():
         resp1 = jsonify({'message' : 'Post could not be eliminated'})
         resp1.status_code = 400
         return  resp1
+
+
 ##Logs out and closes session
 @cross_origin()
 @app.route('/logout')

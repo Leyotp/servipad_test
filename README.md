@@ -4,6 +4,7 @@
 pip install sqlalchemy
 pip install Werkzeug
 pip install flasgger
+pip install routes
 
 #Import sample1 database, there's  default user already created, username: user, passowrd: test
 
